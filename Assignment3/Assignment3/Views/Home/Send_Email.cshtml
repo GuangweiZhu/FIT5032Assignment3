@@ -1,0 +1,52 @@
+﻿@model FIT5032_Week08A.Models.SendEmailViewModel
+
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View</h2>
+
+@using (Html.BeginForm("Index", "SendEmail", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <table>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.to)
+                @Html.EditorFor(model => model.to)
+                @Html.ValidationMessageFor(model => model.to)
+            </td>
+            <td>
+                @Html.LabelFor(model => model.subject)
+                @Html.EditorFor(model => model.subject)
+                @Html.ValidationMessageFor(model => model.subject)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.file)
+                @Html.TextBoxFor(m => m.file, new { type = "file", multiple = "multiple" })
+                @Html.ValidationMessageFor(model => model.file)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                @Html.LabelFor(model => model.body)
+                @Html.TextAreaFor(model => model.body)
+                <script type="text/javascript" language="javascript">
+                    CKEDITOR.replace(@Html.IdFor(model => model.body));
+                </script>
+                @Html.ValidationMessageFor(model => model.body)
+            </td>
+        </tr>
+        <tr><td><button id="submitButton" type="submit">Submit</button></td></tr>
+    </table>
+}
+
+<div>
+    @Html.ActionLink("Back to Home", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
